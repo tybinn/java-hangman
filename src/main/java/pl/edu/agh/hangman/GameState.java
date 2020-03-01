@@ -1,19 +1,46 @@
 package pl.edu.agh.hangman;
 
+import java.util.ArrayList;
+
 public class GameState {
     private String word;
-    private String currentView;
+    private String currentState;
     private int numOfAttempts;
     private int badChoiceses;
+    private ArrayList chosenLetters;
+
+    public String getCurrentState() {
+        return currentState;
+    }
+
+    public int getBadChoiceses() {
+        return badChoiceses;
+    }
+
     public GameState(String word){
         this.word = word;
-        currentView =  generateEmptyFields(word.length());
+        currentState =  generateEmptyFields(word.length());
+        chosenLetters = new ArrayList();
     }
-    public boolean isInWord(String letter){
-        if (word.contains(letter)){
+    public State checkLetter(String letter){
+        if (!chosenLetters.contains(letter)){
+            numOfAttempts ++;
+            if (isInWord(letter)){
 
+                return State.OK;
+            }else{
+                badChoiceses ++;
+                return State.FAIL;
+            }
         }else{
-            badChoiceses =+ 1;
+            return State.ALREADYPROVIDED;
+        }
+    }
+    private boolean isInWord(String letter){
+        if (word.contains(letter)){
+            return true;
+        }else{
+            return false;
         }
     }
     private String generateEmptyFields(int len){
@@ -22,5 +49,8 @@ public class GameState {
             retVal = retVal + "_";
         }
         return retVal;
+    }
+    private void unhideLetters(String letter){
+
     }
 }
