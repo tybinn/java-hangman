@@ -8,7 +8,6 @@ public class GameState {
     private int numOfAttempts;
     private int badChoiceses;
     private ArrayList chosenLetters;
-
     public String getCurrentState() {
         return currentState;
     }
@@ -21,6 +20,10 @@ public class GameState {
         this.word = word.toUpperCase();
         currentState =  generateEmptyFields(word.length());
         chosenLetters = new ArrayList();
+    }
+
+    public int getNumOfAttempts() {
+        return numOfAttempts;
     }
     public State checkLetter(String letter){
         if (!chosenLetters.contains(letter.toUpperCase())){
