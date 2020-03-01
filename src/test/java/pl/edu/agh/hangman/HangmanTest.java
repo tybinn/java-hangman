@@ -16,7 +16,7 @@ public class HangmanTest {
         FileReader fr = new FileReader();
         List<String> words;
 
-        words = fr.readFileInList("C:\\Users\\student44\\hangman\\java-hangman\\src\\main\\resources\\slowa.txt");
+        words = fr.readFileInList("src\\main\\resources\\slowa.txt");
         Assert.assertEquals("file loaded",words.get(1), "prawnik");
 
     }
