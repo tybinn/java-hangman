@@ -20,4 +20,32 @@ public class HangmanTest {
         Assert.assertEquals("file loaded",words.get(1), "prawnik");
 
     }
+    @Test
+    public void testGameStateInit(){
+        GameState gs = new GameState("TEST");
+        Assert.assertEquals("initialization correct", gs.getCurrentState(), "____");
+    }
+    @Test
+    public void testGameStateUserInputCorrect(){
+        GameState gs = new GameState("TEST");
+
+        gs.checkLetter("T");
+        Assert.assertEquals("initialization correct", gs.getCurrentState(), "T__T");
+
+    }
+    @Test
+    public void testGameStateUserInputIncorrect(){
+        GameState gs = new GameState("TEST");
+        gs.checkLetter("W");
+        Assert.assertEquals("initialization correct", gs.getCurrentState(), "____");
+
+    }
+    @Test
+    public void testGameStateUserInputIncorrect2(){
+        GameState gs = new GameState("TEST");
+        gs.checkLetter("W");
+
+        Assert.assertEquals("initialization correct", gs.getBadChoiceses(), 1);
+
+    }
 }

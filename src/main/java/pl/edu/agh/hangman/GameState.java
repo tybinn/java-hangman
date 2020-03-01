@@ -18,18 +18,19 @@ public class GameState {
     }
 
     public GameState(String word){
-        this.word = word;
+        this.word = word.toUpperCase();
         currentState =  generateEmptyFields(word.length());
         chosenLetters = new ArrayList();
     }
     public State checkLetter(String letter){
-        if (!chosenLetters.contains(letter)){
+        if (!chosenLetters.contains(letter.toUpperCase())){
             numOfAttempts ++;
             if (isInWord(letter)){
-
+                unhideLetters(letter);
                 return State.OK;
             }else{
                 badChoiceses ++;
+                chosenLetters.add(letter.toUpperCase());
                 return State.FAIL;
             }
         }else{
@@ -51,6 +52,10 @@ public class GameState {
         return retVal;
     }
     private void unhideLetters(String letter){
-
+        for (int i = 0; i<word.length(); i++ ){
+            if(letter.charAt(0) ==(word.charAt(i))){
+                currentState = new StringBuilder(currentState).replace(i,i+1,letter).toString();
+            }
+        }
     }
 }
